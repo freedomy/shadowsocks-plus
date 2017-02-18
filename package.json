@@ -1,0 +1,54 @@
+{
+  "name": "shadowsocks-plus",
+  "version": "0.1.3",
+  "description": "Shadowsocks Plus",
+  "main": "./build/backend/main.js",
+  "scripts": {
+    "start": "node ./build/backend/main.js config.example.json",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shadowsocks-plus/shadowsocks-plus.git"
+  },
+  "keywords": [
+    "shadowsocks",
+    "plus",
+    "proxy"
+  ],
+  "files": [
+    "scripts/*.sh",
+    "scripts/*.js",
+    "build/backend/*.js",
+    "web/index.html",
+    "web/css/*.css",
+    "web/js/*.js",
+    "config.example.json"
+  ],
+  "bin": {
+    "ssplus": "./scripts/run.js"
+  },
+  "author": "Heyang Zhou",
+  "license": "LGPL-3.0",
+  "bugs": {
+    "url": "https://github.com/shadowsocks-plus/shadowsocks-plus/issues"
+  },
+  "homepage": "https://github.com/shadowsocks-plus/shadowsocks-plus#readme",
+  "dependencies": {
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-es2015": "^6.22.0",
+    "babel-preset-react": "^6.23.0",
+    "babel-preset-stage-3": "^6.22.0",
+    "babel-runtime": "^6.23.0",
+    "babelify": "^7.3.0",
+    "body-parser": "^1.16.1",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.14.1",
+    "react": "^15.4.2",
+    "react-bootstrap": "^0.30.7",
+    "react-dom": "^15.4.2",
+    "request": "^2.79.0",
+    "request-promise": "^4.1.1",
+    "uuid": "^3.0.1"
+  }
+}

@@ -1,0 +1,8 @@
+{
+    "ss_binary_path": "ssserver",
+    "admin_users": [
+        "bab309c6-a250-45d3-bdd8-b5b5de48871d"
+    ],
+    "domain": "127.0.0.1:7791",
+    "instance_list_path": "./ssplus_instances.json"
+}
