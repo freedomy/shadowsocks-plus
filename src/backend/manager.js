@@ -91,6 +91,7 @@ export default class Manager {
 
         if(!instance) return false;
         instance.kill();
+        return true;
     }
 
     removeStoppedInstances() {

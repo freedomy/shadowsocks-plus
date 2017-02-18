@@ -9,5 +9,8 @@ module.exports = {
     "Password too short": "密码过短",
     "Invalid port": "端口无效",
     "Create": "创建",
-    "Create instance": "创建实例"
+    "Create instance": "创建实例",
+    "Save configuration": "保存配置",
+    "Terminate instance": "终止实例",
+    "Instance not found": "实例未找到"
 };

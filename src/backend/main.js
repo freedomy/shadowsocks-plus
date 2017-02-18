@@ -42,6 +42,19 @@ async function verifyClientToken(token) {
     return new User(result.userId, result.username);
 }
 
+function checkAdmin(u) {
+    assert(u instanceof User);
+    assert(cfg.admin_users && cfg.admin_users instanceof Array);
+
+    for(let i = 0; i < cfg.admin_users.length; i++) {
+        if(cfg.admin_users[i] == u.id) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
 app.use(body_parser.urlencoded({
     "extended": false
 }));
@@ -72,6 +85,10 @@ app.use("/web/", express.static(path.join(__dirname, "../../web")));
 app.get("/auth", wrap(async function (req, resp) {
     if(req.query && typeof(req.query.client_token) == "string") {
         let u = await verifyClientToken(req.query.client_token);
+        if(!checkAdmin(u)) {
+            throw "User not in the admin list";
+        }
+
         let sess = new Session(u);
         sessions[sess.token] = sess;
         resp.cookie("session_token", sess.token);
@@ -118,9 +135,49 @@ app.post("/instance/run", wrap((req, resp) => {
     });
 }));
 
+app.post("/instance/kill", wrap((req, resp) => {
+    assert(req.body && typeof(req.body.id) == "string");
+
+    let id = req.body.id;
+    if(!manager.killInstance(id)) {
+        throw "Instance not found";
+    }
+    resp.json({
+        "err": 0,
+        "msg": "OK"
+    });
+}))
+
+app.post("/instance/save", wrap((req, resp) => {
+    fs.writeFile(cfg.instance_list_path, JSON.stringify(manager.getInstances(), null, 4), err => {
+        if(err) {
+            console.log(err);
+            resp.json({
+                "err": 1,
+                "msg": err
+            });
+        }
+        resp.json({
+            "err": 0,
+            "msg": "OK"
+        });
+    });
+}));
+
 async function run() {
     cfg = JSON.parse(fs.readFileSync(process.argv[2], "utf-8"));
     manager = new Manager(cfg.ss_binary_path);
+    
+    try {
+        let savedInstances = JSON.parse(fs.readFileSync(cfg.instance_list_path, "utf-8"));
+        assert(savedInstances instanceof Array);
+        savedInstances.forEach(v => {
+            assert(typeof(v) == "object" && typeof(v.port) == "number" && typeof(v.pw) == "string");
+            manager.runInstance(v.port, v.pw)
+        });
+    } catch(e) {
+
+    }
 
     app.listen(7791);
 }
