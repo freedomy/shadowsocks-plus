@@ -1,9 +1,10 @@
 {
   "name": "shadowsocks-plus",
-  "version": "0.1.0",
+  "version": "0.1.3",
   "description": "Shadowsocks Plus",
-  "main": "build/backend/main.js",
+  "main": "./build/backend/main.js",
   "scripts": {
+    "start": "node ./build/backend/main.js config.example.json",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -15,6 +16,18 @@
     "plus",
     "proxy"
   ],
+  "files": [
+    "scripts/*.sh",
+    "scripts/*.js",
+    "build/backend/*.js",
+    "web/index.html",
+    "web/css/*.css",
+    "web/js/*.js",
+    "config.example.json"
+  ],
+  "bin": {
+    "ssplus": "./scripts/run.js"
+  },
   "author": "Heyang Zhou",
   "license": "LGPL-3.0",
   "bugs": {
