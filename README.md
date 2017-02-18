@@ -5,7 +5,7 @@
 
 # 使用
 
-对于 64 位 Debian / Ubuntu , 本项目提供了[一键部署脚本](https://raw.githubusercontent.com/shadowsocks-plus/shadowsocks-plus/dev/scripts/deploy.sh)。
+对于 64 位 Debian / Ubuntu , 本项目提供了[一键部署脚本](https://raw.githubusercontent.com/shadowsocks-plus/shadowsocks-plus/master/scripts/deploy.sh)。
 
 在 64 位 Debian / Ubuntu 下，以下命令即可完成安装:
 
